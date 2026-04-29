@@ -3,8 +3,10 @@
 # Import required modules and libraries
 import time
 import random
+import shutil
 
-seps = "-"*100                  #Separators for better visibility of code
+size = shutil.get_terminal_size().columns - 1
+seps = "-" * size                  #Separators for better visibility of code
 wait = [0.1, 0.2, 0.3, 0.4]     #wait as a variable to slow down the text and make it feel alive
 
 #Define a function to run the simulation
@@ -46,7 +48,7 @@ def market():
                 print("Succesfully bought the shares! \n")
             elif wallet < total_cost:
                 time.sleep(random.choice(wait))
-                print("You don't have enough money! /n")
+                print("You don't have enough money! \n")
             elif stocks_available < buy:
                 time.sleep(random.choice(wait))
                 print(f"{buy} are not available. Try selecting a lower amount. \n")
@@ -68,7 +70,7 @@ def market():
                 print("Succesfully sold the shares! \n")
             elif share_held < sell:
                 time.sleep(random.choice(wait))
-                print("You don't have enough shares! /n")
+                print("You don't have enough shares! \n")
             else:                       #Create safety mechanism
                 time.sleep(random.choice(wait))
                 print("Error")
@@ -82,6 +84,7 @@ def market():
             if confirmation in ("y", "yes"):
                 time.sleep(random.choice(wait))
                 print("Closed simulation")
+                print(seps)
                 simulating = False
             else:
                 continue
