@@ -23,12 +23,17 @@ def market():
     # Make a loop that shows the user its staus before making any changes
     simulating = True
     while simulating == True:
+
+        if day > 1:
+            price_change_percent = random.randint(-10, 10)
+            price *= (1 + price_change_percent/100)
+
         time.sleep(random.choice(wait))
         print(f"\n {seps} \n")
         print(f"Day : {day}")
         print(f"Company name : {company}")
-        print(f"Price of stock : {price}")
-        print(f"Your money : {wallet}")
+        print(f"Price of stock : {price:.2f}")
+        print(f"Your money : {wallet:.2f}")
         print(f"Your shares : {share_held}")
         print(f"Stocks remaining : {stocks_available}")
         print(f"\n {seps} \n")
@@ -88,6 +93,14 @@ def market():
             confirmation = input("Are you sure you want to exit the simlation? \n")
             if confirmation in ("y", "yes"):
                 time.sleep(random.choice(wait))
+                print(seps)
+                print("Here is how you did - ")
+                print(f"Day : {day}")
+                print(f"Company name : {company}")
+                print(f"Price of stock : {price:.2f}")
+                print(f"Your money : {wallet:.2f}")
+                print(f"Your shares : {share_held}")
+                print(seps)
                 print("Closed simulation")
                 print(seps)
                 simulating = False
