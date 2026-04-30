@@ -7,7 +7,7 @@ import shutil
 
 size = shutil.get_terminal_size().columns - 1
 seps = "-" * size                  #Separators for better visibility of code
-wait = [0.1, 0.2, 0.3, 0.4]     #wait as a variable to slow down the text and make it feel alive
+wait = [0.1, 0.2, 0.3]     #wait as a variable to slow down the text and make it feel alive
 
 #Define a function to run the simulation
 def market():
@@ -18,12 +18,14 @@ def market():
     wallet = 1000.00            #Money you have
     share_held = 0              #No. if shares u have
     stocks_available = 1000     #No. of stocks available
+    day = 1                     #Eveyday the day counter increses for price change
 
     # Make a loop that shows the user its staus before making any changes
     simulating = True
     while simulating == True:
         time.sleep(random.choice(wait))
         print(f"\n {seps} \n")
+        print(f"Day : {day}")
         print(f"Company name : {company}")
         print(f"Price of stock : {price}")
         print(f"Your money : {wallet}")
@@ -46,6 +48,7 @@ def market():
                 stocks_available -= buy
                 time.sleep(random.choice(wait))
                 print("Succesfully bought the shares! \n")
+                day += 1
             elif wallet < total_cost:
                 time.sleep(random.choice(wait))
                 print("You don't have enough money! \n")
@@ -68,6 +71,7 @@ def market():
                 stocks_available += sell
                 time.sleep(random.choice(wait))
                 print("Succesfully sold the shares! \n")
+                day += 1
             elif share_held < sell:
                 time.sleep(random.choice(wait))
                 print("You don't have enough shares! \n")
@@ -77,7 +81,8 @@ def market():
             time.sleep(random.choice(wait))
         elif action in ("w", "3", "wait"):
             time.sleep(random.choice(wait))
-            print()
+            print("New day")
+            day += 1
         elif action in ("q", "4", "quit"):
             time.sleep(random.choice(wait))
             confirmation = input("Are you sure you want to exit the simlation? \n")
@@ -90,6 +95,6 @@ def market():
                 continue
             time.sleep(random.choice(wait))
         else:
-            print("Error")      #make a safety mechanism
+            print("Error")      #make a safety mechanism, so it doesn't spit an error !!
 
 market()
